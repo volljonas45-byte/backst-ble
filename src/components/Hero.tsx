@@ -1,186 +1,146 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 100);
-    return () => clearTimeout(t);
-  }, []);
+  const [show, setShow] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setShow(true), 80); return () => clearTimeout(t); }, []);
 
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      {/* Background image placeholder */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            "linear-gradient(135deg, #0A0A0A 0%, #1a0408 40%, #2d0510 70%, #0A0A0A 100%)",
-        }}
-      >
-        {/* Placeholder for hero image – replace with your image later */}
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            backgroundImage: `url('/images/hero-bg.jpg')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        {/* Red vignette overlay */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 30%, rgba(10,10,10,0.85) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, transparent 30%, transparent 60%, rgba(10,10,10,0.9) 100%)",
-          }}
-        />
-      </div>
-
-      {/* Animated grain texture */}
-      <div
-        className="absolute inset-0 z-0 opacity-5 pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px",
-        }}
+    <section id="hero" style={{ position: "relative", height: "100svh", minHeight: 600, overflow: "hidden" }}>
+      {/* Background image */}
+      <Image
+        src="/images/561a2ce904a37.jpeg"
+        alt="Backstüble Schwaigern von außen"
+        fill
+        priority
+        style={{ objectFit: "cover", objectPosition: "center 60%" }}
       />
 
+      {/* Gradient overlay – warm, not too dark */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(to bottom, rgba(20,14,10,0.45) 0%, rgba(20,14,10,0.25) 40%, rgba(20,14,10,0.65) 100%)",
+      }} />
+
       {/* Content */}
-      <div
-        className="relative z-10 text-center px-6 max-w-4xl mx-auto"
-        style={{
-          opacity: loaded ? 1 : 0,
-          transform: loaded ? "translateY(0)" : "translateY(20px)",
-          transition: "opacity 0.9s ease, transform 0.9s ease",
-        }}
-      >
-        {/* Logo placeholder */}
-        <div className="flex justify-center mb-8">
-          <div
-            className="w-28 h-28 rounded-full flex items-center justify-center border-2"
-            style={{
-              borderColor: "var(--red)",
-              background: "rgba(196,20,40,0.15)",
-              backdropFilter: "blur(4px)",
-            }}
-          >
-            {/* Replace with <Image src="/images/logo.png" alt="Logo" width={80} height={80} /> */}
-            <span
-              className="text-4xl font-black tracking-tighter"
-              style={{
-                fontFamily: "var(--font-heading)",
-                color: "var(--red)",
-              }}
-            >
-              BS
-            </span>
+      <div style={{
+        position: "absolute", inset: 0,
+        display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center",
+        textAlign: "center", padding: "0 24px",
+        paddingTop: 72,
+      }}>
+        {/* Logo */}
+        <div style={{
+          opacity: show ? 1 : 0, transform: show ? "scale(1)" : "scale(0.85)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+          marginBottom: 28,
+        }}>
+          <div style={{
+            width: 110, height: 110, borderRadius: "50%",
+            background: "rgba(255,255,255,0.95)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.3)",
+            margin: "0 auto",
+          }}>
+            <Image src="/images/Backstueble_logo.png" alt="Logo" width={88} height={88} style={{ objectFit: "contain" }} />
           </div>
         </div>
 
         {/* Overline */}
-        <p
-          className="text-xs font-semibold tracking-[0.3em] uppercase mb-4"
-          style={{ color: "var(--red)" }}
-        >
+        <p style={{
+          opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(16px)",
+          transition: "opacity 0.6s 0.2s ease, transform 0.6s 0.2s ease",
+          fontSize: 12, fontWeight: 600, letterSpacing: "0.3em",
+          textTransform: "uppercase", color: "rgba(255,255,255,0.75)",
+          marginBottom: 14,
+        }}>
           Seit 1983 · Schwaigern
         </p>
 
-        {/* Main title */}
-        <h1
-          className="text-5xl sm:text-7xl lg:text-8xl font-black mb-4 leading-none"
-          style={{
-            fontFamily: "var(--font-heading)",
-            color: "white",
-            textShadow: "0 2px 40px rgba(196,20,40,0.4)",
-          }}
-        >
+        {/* Title */}
+        <h1 style={{
+          opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(20px)",
+          transition: "opacity 0.7s 0.3s ease, transform 0.7s 0.3s ease",
+          fontFamily: "var(--font-heading)", fontWeight: 900,
+          fontSize: "clamp(52px, 10vw, 96px)", lineHeight: 1,
+          color: "white", marginBottom: 10,
+          textShadow: "0 2px 24px rgba(0,0,0,0.3)",
+        }}>
           Backstüble
         </h1>
-        <h2
-          className="text-xl sm:text-2xl font-light tracking-widest uppercase mb-6"
-          style={{
-            color: "rgba(245,240,235,0.6)",
-            letterSpacing: "0.25em",
-            fontFamily: "var(--font-body)",
-          }}
-        >
-          Schwaigern
-        </h2>
-
-        {/* Slogan */}
-        <p
-          className="text-lg sm:text-xl font-light mb-10 max-w-lg mx-auto"
-          style={{
-            color: "rgba(245,240,235,0.75)",
-            fontFamily: "var(--font-body)",
-            lineHeight: 1.7,
-          }}
-        >
-          Ihr Bistro mit Pfiff im Herzen von Schwaigern.
+        <p style={{
+          opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(16px)",
+          transition: "opacity 0.6s 0.45s ease, transform 0.6s 0.45s ease",
+          fontSize: "clamp(13px, 2vw, 16px)", fontWeight: 400, letterSpacing: "0.2em",
+          textTransform: "uppercase", color: "rgba(255,255,255,0.7)",
+          marginBottom: 22,
+        }}>
+          Bistro · Bar · Schwaigern
         </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="tel:+4971384355"
-            className="flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:scale-105"
-            style={{
-              background: "var(--red)",
-              color: "white",
-              letterSpacing: "0.1em",
-              boxShadow: "0 0 30px rgba(196,20,40,0.4)",
-            }}
+        {/* Slogan */}
+        <p style={{
+          opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(16px)",
+          transition: "opacity 0.6s 0.55s ease, transform 0.6s 0.55s ease",
+          fontFamily: "var(--font-heading)", fontStyle: "italic",
+          fontSize: "clamp(16px, 2.5vw, 22px)", color: "rgba(255,255,255,0.88)",
+          marginBottom: 40, maxWidth: 480,
+        }}>
+          „Ihr Bistro mit Pfiff im Herzen von Schwaigern."
+        </p>
+
+        {/* Buttons */}
+        <div style={{
+          opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(16px)",
+          transition: "opacity 0.6s 0.65s ease, transform 0.6s 0.65s ease",
+          display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center",
+        }}>
+          <a href="tel:+4971384355" style={{
+            background: "var(--red)", color: "white",
+            borderRadius: 100, padding: "14px 32px",
+            fontSize: 14, fontWeight: 600, letterSpacing: "0.05em",
+            textDecoration: "none", transition: "all 0.2s",
+            boxShadow: "0 4px 20px rgba(196,20,40,0.5)",
+            display: "flex", alignItems: "center", gap: 8,
+          }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = "scale(1.04)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 28px rgba(196,20,40,0.6)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "scale(1)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 4px 20px rgba(196,20,40,0.5)"; }}
           >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
               <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
             </svg>
             Reservieren
           </a>
-          <button
-            onClick={() => document.querySelector("#oeffnungszeiten")?.scrollIntoView({ behavior: "smooth" })}
-            className="flex items-center gap-2 px-8 py-4 rounded-full font-semibold text-sm tracking-wider uppercase transition-all duration-300 hover:scale-105"
-            style={{
-              border: "1px solid rgba(245,240,235,0.3)",
-              color: "rgba(245,240,235,0.85)",
-              letterSpacing: "0.1em",
-              background: "rgba(245,240,235,0.05)",
-              backdropFilter: "blur(4px)",
-            }}
+          <button onClick={() => document.querySelector("#oeffnungszeiten")?.scrollIntoView({ behavior: "smooth" })} style={{
+            background: "rgba(255,255,255,0.15)", color: "white",
+            border: "1.5px solid rgba(255,255,255,0.5)",
+            borderRadius: 100, padding: "14px 32px",
+            fontSize: 14, fontWeight: 500, letterSpacing: "0.05em",
+            cursor: "pointer", backdropFilter: "blur(8px)",
+            transition: "all 0.2s",
+          }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.25)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "rgba(255,255,255,0.15)"; }}
           >
             Öffnungszeiten
           </button>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
-        <span
-          className="text-xs tracking-[0.2em] uppercase"
-          style={{ color: "rgba(245,240,235,0.4)" }}
-        >
-          Scroll
-        </span>
-        <div
-          className="w-px h-12"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(196,20,40,0.8), transparent)",
-          }}
-        />
+      {/* Scroll arrow */}
+      <div style={{
+        position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)",
+        display: "flex", flexDirection: "column", alignItems: "center", gap: 6,
+        opacity: show ? 0.6 : 0, transition: "opacity 1s 1s ease",
+      }}>
+        <span style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "white" }}>Scroll</span>
+        <div style={{
+          width: 1, height: 40,
+          background: "linear-gradient(to bottom, white, transparent)",
+        }} />
       </div>
     </section>
   );

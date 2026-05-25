@@ -5,7 +5,8 @@ import "./globals.css";
 const playfair = Playfair_Display({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["400", "600", "700", "900"],
+  style: ["normal", "italic"],
 });
 
 const inter = Inter({
@@ -15,24 +16,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Backstüble Schwaigern – Ihr Bistro mit Pfiff",
+  title: "Backstüble Schwaigern – Bistro & Bar seit 1983",
   description:
-    "Das Backstüble Schwaigern – Ihr gemütliches Bistro & Bar im Herzen von Schwaigern. Wochenkarte, Öffnungszeiten & mehr.",
-  keywords: "Backstüble, Schwaigern, Bistro, Bar, Kneipe, Rico Wendler",
+    "Das Backstüble in Schwaigern – Ihr gemütliches Bistro mit Pfiff. Wochenkarte, Öffnungszeiten, Galerie und mehr.",
+  keywords: "Backstüble, Schwaigern, Bistro, Bar, Kneipe, Rico Wendler, 74193",
+  openGraph: {
+    title: "Backstüble Schwaigern",
+    description: "Ihr Bistro mit Pfiff im Herzen von Schwaigern – seit 1983.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="de"
-      className={`${playfair.variable} ${inter.variable}`}
-      style={{ scrollBehavior: "smooth" }}
-    >
-      <body className="antialiased">{children}</body>
+    <html lang="de" className={`${playfair.variable} ${inter.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
