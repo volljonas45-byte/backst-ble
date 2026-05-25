@@ -1,66 +1,58 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #F7F4F0;
-  --white: #FFFFFF;
-  --dark: #1A1714;
-  --dark2: #2C2825;
-  --text: #1A1714;
-  --text-mid: #6B6562;
-  --text-light: #A09895;
-  --red: #C41428;
-  --red-hover: #A5101F;
-  --red-soft: #FDF0F2;
-  --border: #E5E0DA;
-  --border-light: #F0ECE7;
+  --ink:    #18140F;
+  --ink2:   #2E2923;
+  --muted:  #7A7470;
+  --faint:  #B0ABA7;
+  --bg:     #F8F5F1;
+  --cream:  #EDE8E1;
+  --white:  #FFFFFF;
+  --line:   #DDD8D0;
+  --red:    #C41428;
+  --red2:   #9E0F1F;
+
+  --f-display: var(--font-display);
+  --f-body:    var(--font-body);
 }
 
-@theme inline {
-  --font-sans: var(--font-body);
-  --font-display: var(--font-heading);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--ink);
+  font-family: var(--f-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
-::selection { background: var(--red); color: white; }
-
+::selection { background: var(--red); color: #fff; }
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--border-light); }
-::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--red); }
 
-/* Scroll fade-in animation */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
+a { color: inherit; }
+
+/* Utility */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Reveal animation */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+.reveal { animation: reveal 0.75s cubic-bezier(.22,.68,0,1.1) both; }
+.d1 { animation-delay: 0.05s; }
+.d2 { animation-delay: 0.18s; }
+.d3 { animation-delay: 0.30s; }
+.d4 { animation-delay: 0.42s; }
+.d5 { animation-delay: 0.55s; }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+@media (max-width: 768px) {
+  .container { padding: 0 20px; }
 }
-
-.animate-fade-up {
-  opacity: 0;
-  animation: fadeUp 0.7s cubic-bezier(.22,.68,0,1.2) forwards;
-}
-
-.animate-fade-in {
-  opacity: 0;
-  animation: fadeIn 0.6s ease forwards;
-}
-
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
-.delay-5 { animation-delay: 0.55s; }

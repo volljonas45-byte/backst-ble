@@ -1,100 +1,101 @@
-"use client";
-
-const rows = [
-  { days: "Mo & Di", time: null },
-  { days: "Mi – Do", time: "16:00 – 00:00" },
-  { days: "Fr – Sa", time: "16:00 – 01:00" },
-  { days: "Sonntag", time: "17:00 – 23:00" },
+const schedule = [
+  { day: "Montag",     time: null },
+  { day: "Dienstag",   time: null },
+  { day: "Mittwoch",   time: "16:00 – 00:00" },
+  { day: "Donnerstag", time: "16:00 – 00:00" },
+  { day: "Freitag",    time: "16:00 – 01:00" },
+  { day: "Samstag",    time: "16:00 – 01:00" },
+  { day: "Sonntag",    time: "17:00 – 23:00" },
 ];
 
-function todayRow() {
-  const d = new Date().getDay(); // 0=So, 1=Mo, 2=Di, 3=Mi, 4=Do, 5=Fr, 6=Sa
-  if (d === 0) return "Sonntag";
-  if (d === 1 || d === 2) return "Mo & Di";
-  if (d === 3 || d === 4) return "Mi – Do";
-  if (d === 5 || d === 6) return "Fr – Sa";
-  return "";
+function getToday() {
+  // 0=So → index 6, 1=Mo → 0, ...
+  const d = new Date().getDay();
+  return d === 0 ? 6 : d - 1;
 }
 
 export default function Oeffnungszeiten() {
-  const today = todayRow();
+  const todayIdx = getToday();
 
   return (
-    <section id="oeffnungszeiten" style={{ background: "var(--white)", padding: "96px 24px" }}>
-      <div style={{ maxWidth: 960, margin: "0 auto" }}>
+    <section id="oeffnungszeiten" style={{ background: "var(--white)" }}>
+      <div style={{ maxWidth: 1240, margin: "0 auto", padding: "100px 32px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px 120px", alignItems: "start" }} className="hours-grid">
 
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: 64 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--red)", marginBottom: 12 }}>
-            Wann wir für euch da sind
-          </p>
-          <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 800, fontSize: "clamp(36px,5vw,54px)", color: "var(--dark)", lineHeight: 1.1 }}>
-            Öffnungszeiten
-          </h2>
-        </div>
+          {/* Left – heading */}
+          <div>
+            <p style={{
+              fontFamily: "var(--f-body)", fontWeight: 500, fontSize: 11,
+              letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--red)",
+              marginBottom: 20,
+            }}>Öffnungszeiten</p>
+            <h2 style={{
+              fontFamily: "var(--f-display)", fontWeight: 800,
+              fontSize: "clamp(36px,5vw,56px)", lineHeight: 1.05,
+              color: "var(--ink)", letterSpacing: "-0.02em", marginBottom: 28,
+            }}>
+              Wann ihr uns<br />findet
+            </h2>
+            <p style={{ fontFamily: "var(--f-body)", fontSize: 16, color: "var(--muted)", lineHeight: 1.7, maxWidth: 340, marginBottom: 36 }}>
+              Reservierungen bitte telefonisch während unserer Öffnungszeiten.
+            </p>
+            <a href="tel:+4971384355" style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              color: "var(--red)", fontFamily: "var(--f-body)",
+              fontWeight: 600, fontSize: 18, textDecoration: "none",
+            }}>
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
+              +49 (0) 7138 4355
+            </a>
+          </div>
 
-        {/* Main grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 16, marginBottom: 32 }}>
-          {rows.map(r => {
-            const isToday = r.days === today;
-            const isClosed = !r.time;
-            return (
-              <div key={r.days} style={{
-                borderRadius: 20, padding: "28px 24px",
-                background: isToday ? "var(--red)" : isClosed ? "var(--bg)" : "var(--white)",
-                border: isToday ? "none" : `1.5px solid ${isClosed ? "var(--border-light)" : "var(--border)"}`,
-                boxShadow: isToday ? "0 8px 32px rgba(196,20,40,0.25)" : "none",
-                transition: "transform 0.2s, box-shadow 0.2s",
-              }}
-                onMouseEnter={e => { if (!isToday) (e.currentTarget as HTMLElement).style.transform = "translateY(-3px)"; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = "translateY(0)"; }}
-              >
-                {isToday && (
-                  <span style={{
-                    display: "inline-block", fontSize: 10, fontWeight: 700,
-                    letterSpacing: "0.15em", textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.7)", marginBottom: 10,
-                  }}>Heute geöffnet</span>
-                )}
-                <p style={{
-                  fontSize: 17, fontWeight: 700,
-                  color: isToday ? "white" : isClosed ? "var(--text-light)" : "var(--dark)",
-                  marginBottom: 8,
-                  fontFamily: "var(--font-heading)",
+          {/* Right – clean list */}
+          <div style={{ paddingTop: 8 }}>
+            {schedule.map((row, i) => {
+              const isToday = i === todayIdx;
+              return (
+                <div key={row.day} style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "16px 0",
+                  borderBottom: i < schedule.length - 1 ? "1px solid var(--line)" : "none",
+                  background: isToday ? "transparent" : "transparent",
                 }}>
-                  {r.days}
-                </p>
-                {isClosed ? (
-                  <p style={{ fontSize: 13, color: isToday ? "rgba(255,255,255,0.6)" : "var(--text-light)" }}>Ruhetag</p>
-                ) : (
-                  <p style={{
-                    fontSize: 20, fontWeight: 700,
-                    color: isToday ? "white" : "var(--red)",
-                    letterSpacing: "-0.01em",
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    {isToday && (
+                      <span style={{
+                        width: 6, height: 6, borderRadius: "50%",
+                        background: "var(--red)", display: "inline-block", flexShrink: 0,
+                      }} />
+                    )}
+                    <span style={{
+                      fontFamily: "var(--f-body)", fontSize: 15, fontWeight: isToday ? 600 : 400,
+                      color: isToday ? "var(--ink)" : "var(--muted)",
+                      paddingLeft: isToday ? 0 : 16,
+                    }}>
+                      {row.day}
+                    </span>
+                  </div>
+                  <span style={{
+                    fontFamily: "var(--f-display)", fontSize: 15, fontWeight: 600,
+                    color: isToday ? "var(--red)" : row.time ? "var(--ink2)" : "var(--faint)",
+                    letterSpacing: "0.01em",
                   }}>
-                    {r.time}
-                  </p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Reservation note */}
-        <div style={{
-          borderRadius: 16, padding: "20px 24px",
-          background: "var(--red-soft)", border: "1.5px solid rgba(196,20,40,0.15)",
-          display: "flex", alignItems: "flex-start", gap: 14,
-        }}>
-          <svg style={{ color: "var(--red)", flexShrink: 0, marginTop: 2 }} width="18" height="18" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-          </svg>
-          <p style={{ fontSize: 14, color: "var(--text-mid)", lineHeight: 1.6 }}>
-            <strong style={{ color: "var(--dark)" }}>Reservierungen</strong> bitte nur telefonisch während unserer Öffnungszeiten unter{" "}
-            <a href="tel:+4971384355" style={{ color: "var(--red)", fontWeight: 600 }}>+49 (0) 7138 4355</a>
-          </p>
+                    {row.time ?? "Ruhetag"}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hours-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        }
+      `}</style>
     </section>
   );
 }
