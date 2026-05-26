@@ -24,7 +24,7 @@ export default function Geschichte() {
               color: "var(--red)", marginBottom: 20,
             }}>Seit 1812</p>
             <h2 style={{
-              fontFamily: "var(--f-display)", fontWeight: 800,
+              fontFamily: "var(--f-display)", fontWeight: 700,
               fontSize: "clamp(32px,3.5vw,48px)", lineHeight: 1.05,
               color: "var(--ink)", letterSpacing: "-0.02em",
             }}>

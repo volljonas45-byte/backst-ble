@@ -1,5 +1,5 @@
 "use client";
-import { img } from "@/lib/img";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -16,7 +16,7 @@ export default function Footer() {
           color: "rgba(255,255,255,0.3)", marginBottom: 16,
         }}>Wir freuen uns auf euch</p>
         <h3 style={{
-          fontFamily: "var(--f-display)", fontWeight: 800,
+          fontFamily: "var(--f-display)", fontWeight: 700,
           fontSize: "clamp(28px,4vw,48px)", color: "white",
           letterSpacing: "-0.02em", marginBottom: 32,
         }}>
@@ -44,10 +44,12 @@ export default function Footer() {
         }}>
           {/* Brand */}
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <img
-              src={img("/images/Backstueble_logo.png")}
+            <Image
+              src="/images/Backstueble_logo.png"
               alt="Logo"
-              style={{ width: 32, height: 32, objectFit: "contain" }}
+              width={32}
+              height={32}
+              style={{ objectFit: "contain" }}
             />
             <span style={{
               fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 16,

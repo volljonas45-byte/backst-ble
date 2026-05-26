@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { img } from "@/lib/img";
+import Image from "next/image";
 
 const links = [
   { label: "Karte", href: "#wochenkarte" },
@@ -41,10 +41,12 @@ export default function Navbar() {
           background: "none", border: "none", cursor: "pointer",
           display: "flex", alignItems: "center", gap: 10,
         }}>
-          <img
-            src={img("/images/Backstueble_logo.png")}
+          <Image
+            src="/images/Backstueble_logo.png"
             alt="Backstüble Logo"
-            style={{ width: 36, height: 36, objectFit: "contain" }}
+            width={36}
+            height={36}
+            style={{ objectFit: "contain" }}
           />
           <span style={{
             fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 16,

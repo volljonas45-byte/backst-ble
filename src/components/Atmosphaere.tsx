@@ -1,4 +1,4 @@
-import { img } from "@/lib/img";
+import Image from "next/image";
 
 export default function Atmosphaere() {
   return (
@@ -7,10 +7,12 @@ export default function Atmosphaere() {
 
         {/* Photo */}
         <div style={{ position: "relative", minHeight: 420 }}>
-          <img
-            src={img("/images/0822c4ea646c160cb4e0e100c1325a09.jpg")}
+          <Image
+            src="/images/0822c4ea646c160cb4e0e100c1325a09.jpg"
             alt="Oktoberfest im Backstüble"
-            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
+            fill
+            sizes="50vw"
+            style={{ objectFit: "cover", objectPosition: "center" }}
           />
           <div style={{
             position: "absolute", inset: 0,
@@ -30,9 +32,9 @@ export default function Atmosphaere() {
           }}>Das Backstüble</p>
 
           <h2 style={{
-            fontFamily: "var(--f-display)", fontWeight: 800,
+            fontFamily: "var(--f-display)", fontWeight: 700,
             fontSize: "clamp(30px,4vw,50px)", lineHeight: 1.1,
-            color: "white", letterSpacing: "-0.02em", marginBottom: 24,
+            color: "white", letterSpacing: "-0.01em", marginBottom: 24,
           }}>
             Mehr als eine Bar.<br />
             Ein Stück Schwaigern.
@@ -47,7 +49,7 @@ export default function Atmosphaere() {
             Kein Schnickschnack, aber mit Pfiff.
           </p>
 
-          {/* Stats – clean */}
+          {/* Stats */}
           <div style={{ display: "flex", gap: 48 }}>
             {[
               { n: "1983", l: "Eröffnet" },
@@ -56,7 +58,7 @@ export default function Atmosphaere() {
             ].map(s => (
               <div key={s.l}>
                 <p style={{
-                  fontFamily: "var(--f-display)", fontWeight: 800,
+                  fontFamily: "var(--f-display)", fontWeight: 700,
                   fontSize: 32, color: "white", lineHeight: 1, marginBottom: 6,
                 }}>
                   {s.n}

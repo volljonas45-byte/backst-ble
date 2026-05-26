@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { img } from "@/lib/img";
+import Image from "next/image";
 
 const photos = [
   { src: "/images/c86a5445f643f01864357342fbf97069.jpg",  alt: "Sommernacht vor dem Backstüble",   cat: "Events" },
@@ -41,9 +41,9 @@ export default function Galerie() {
               color: "var(--red)", marginBottom: 12,
             }}>Einblicke</p>
             <h2 style={{
-              fontFamily: "var(--f-display)", fontWeight: 800,
+              fontFamily: "var(--f-display)", fontWeight: 700,
               fontSize: "clamp(32px,4vw,50px)", lineHeight: 1.05,
-              color: "var(--ink)", letterSpacing: "-0.02em",
+              color: "var(--ink)", letterSpacing: "-0.01em",
             }}>Galerie</h2>
           </div>
 
@@ -72,7 +72,6 @@ export default function Galerie() {
           gap: 10,
         }} className="gal-grid">
           {shown.map((p, i) => {
-            // Make first item span 2 cols if Alle
             const isFeature = i === 0 && active === "Alle";
             return (
               <div
@@ -83,17 +82,19 @@ export default function Galerie() {
                   gridColumn: isFeature ? "span 2" : undefined,
                   gridRow: isFeature ? "span 2" : undefined,
                   aspectRatio: isFeature ? "auto" : "1",
+                  minHeight: isFeature ? 400 : undefined,
                   cursor: "zoom-in", overflow: "hidden", borderRadius: 4,
                   background: "var(--cream)",
                 }}
               >
-                <img
-                  src={img(p.src)}
+                <Image
+                  src={p.src}
                   alt={p.alt}
+                  fill
                   loading="lazy"
+                  sizes={isFeature ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 900px) 50vw, 25vw"}
                   style={{
-                    width: "100%", height: "100%",
-                    objectFit: "cover", display: "block",
+                    objectFit: "cover",
                     transition: "transform 0.45s ease",
                   }}
                   onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
@@ -112,10 +113,12 @@ export default function Galerie() {
           zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center",
           padding: 24, cursor: "zoom-out",
         }}>
-          <img
-            src={img(lb)}
+          <Image
+            src={lb}
             alt="Vergrößert"
-            style={{ maxWidth: "92vw", maxHeight: "92vh", objectFit: "contain", borderRadius: 4 }}
+            width={1920}
+            height={1280}
+            style={{ maxWidth: "92vw", maxHeight: "92vh", width: "auto", height: "auto", objectFit: "contain", borderRadius: 4 }}
           />
           <button onClick={() => setLb(null)} style={{
             position: "fixed", top: 20, right: 20,

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { img } from "@/lib/img";
+import Image from "next/image";
 
 export default function Hero() {
   const [up, setUp] = useState(false);
@@ -12,13 +12,13 @@ export default function Hero() {
       overflow: "hidden", display: "flex", alignItems: "flex-end",
     }}>
       {/* Photo */}
-      <img
-        src={img("/images/561a2ce904a37.jpeg")}
+      <Image
+        src="/images/561a2ce904a37.jpeg"
         alt="Backstüble Schwaigern"
-        style={{
-          position: "absolute", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", objectPosition: "center 65%",
-        }}
+        fill
+        priority
+        sizes="100vw"
+        style={{ objectFit: "cover", objectPosition: "center 65%" }}
       />
 
       {/* Overlay – bottom heavy */}
@@ -44,9 +44,9 @@ export default function Hero() {
         </p>
 
         <h1 style={{
-          fontFamily: "var(--f-display)", fontWeight: 800,
+          fontFamily: "var(--f-display)", fontWeight: 700, fontStyle: "italic",
           fontSize: "clamp(56px, 10vw, 120px)",
-          lineHeight: 0.95, letterSpacing: "-0.02em",
+          lineHeight: 0.95, letterSpacing: "-0.01em",
           color: "white", marginBottom: 28,
         }}>
           Back&shy;stüble

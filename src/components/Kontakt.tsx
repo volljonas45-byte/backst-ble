@@ -13,7 +13,7 @@ export default function Kontakt() {
             color: "var(--red)", marginBottom: 16,
           }}>Kontakt & Anfahrt</p>
           <h2 style={{
-            fontFamily: "var(--f-display)", fontWeight: 800,
+            fontFamily: "var(--f-display)", fontWeight: 700,
             fontSize: "clamp(32px,4vw,52px)", lineHeight: 1.05,
             color: "var(--ink)", letterSpacing: "-0.02em",
           }}>
