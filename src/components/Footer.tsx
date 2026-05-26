@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { img } from "@/lib/img";
 
 export default function Footer() {
   return (
@@ -44,12 +44,11 @@ export default function Footer() {
         }}>
           {/* Brand */}
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <Image
-              src="/images/Backstueble_logo.png"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={img("/images/Backstueble_logo.png")}
               alt="Logo"
-              width={32}
-              height={32}
-              style={{ objectFit: "contain" }}
+              style={{ width: 32, height: 32, objectFit: "contain" }}
             />
             <span style={{
               fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 16,

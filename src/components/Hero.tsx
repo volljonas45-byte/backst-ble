@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import Image from "next/image";
+import { img } from "@/lib/img";
 
 export default function Hero() {
   const [up, setUp] = useState(false);
@@ -12,13 +12,14 @@ export default function Hero() {
       overflow: "hidden", display: "flex", alignItems: "flex-end",
     }}>
       {/* Photo */}
-      <Image
-        src="/images/561a2ce904a37.jpeg"
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={img("/images/561a2ce904a37.jpeg")}
         alt="Backstüble Schwaigern"
-        fill
-        priority
-        sizes="100vw"
-        style={{ objectFit: "cover", objectPosition: "center 65%" }}
+        style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", objectPosition: "center 65%",
+        }}
       />
 
       {/* Overlay – bottom heavy */}

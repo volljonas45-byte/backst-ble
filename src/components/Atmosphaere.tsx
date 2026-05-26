@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { img } from "@/lib/img";
 
 export default function Atmosphaere() {
   return (
@@ -7,12 +7,11 @@ export default function Atmosphaere() {
 
         {/* Photo */}
         <div style={{ position: "relative", minHeight: 420 }}>
-          <Image
-            src="/images/0822c4ea646c160cb4e0e100c1325a09.jpg"
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={img("/images/0822c4ea646c160cb4e0e100c1325a09.jpg")}
             alt="Oktoberfest im Backstüble"
-            fill
-            sizes="50vw"
-            style={{ objectFit: "cover", objectPosition: "center" }}
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
           />
           <div style={{
             position: "absolute", inset: 0,

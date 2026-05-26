@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
+import { img } from "@/lib/img";
 
 const photos = [
   { src: "/images/c86a5445f643f01864357342fbf97069.jpg",  alt: "Sommernacht vor dem Backstüble",   cat: "Events" },
@@ -82,19 +82,18 @@ export default function Galerie() {
                   gridColumn: isFeature ? "span 2" : undefined,
                   gridRow: isFeature ? "span 2" : undefined,
                   aspectRatio: isFeature ? "auto" : "1",
-                  minHeight: isFeature ? 400 : undefined,
                   cursor: "zoom-in", overflow: "hidden", borderRadius: 4,
                   background: "var(--cream)",
                 }}
               >
-                <Image
-                  src={p.src}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={img(p.src)}
                   alt={p.alt}
-                  fill
                   loading="lazy"
-                  sizes={isFeature ? "(max-width: 900px) 100vw, 50vw" : "(max-width: 900px) 50vw, 25vw"}
                   style={{
-                    objectFit: "cover",
+                    width: "100%", height: "100%",
+                    objectFit: "cover", display: "block",
                     transition: "transform 0.45s ease",
                   }}
                   onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.04)")}
@@ -113,12 +112,11 @@ export default function Galerie() {
           zIndex: 200, display: "flex", alignItems: "center", justifyContent: "center",
           padding: 24, cursor: "zoom-out",
         }}>
-          <Image
-            src={lb}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={img(lb)}
             alt="Vergrößert"
-            width={1920}
-            height={1280}
-            style={{ maxWidth: "92vw", maxHeight: "92vh", width: "auto", height: "auto", objectFit: "contain", borderRadius: 4 }}
+            style={{ maxWidth: "92vw", maxHeight: "92vh", objectFit: "contain", borderRadius: 4 }}
           />
           <button onClick={() => setLb(null)} style={{
             position: "fixed", top: 20, right: 20,
