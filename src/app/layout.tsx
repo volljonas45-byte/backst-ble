@@ -18,8 +18,16 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   title: "Backstüble Schwaigern – Bistro & Bar seit 1983",
   description:
-    "Das Backstüble in Schwaigern – Ihr gemütliches Bistro & Bar im Herzen von Schwaigern. Wochenkarte, Öffnungszeiten & mehr.",
-  keywords: "Backstüble, Schwaigern, Bistro, Bar, Kneipe, Rico Wendler, 74193",
+    "Das Backstüble in Schwaigern – gemütliches Bistro & Bar mit Flammkuchen, Burgern, Schnitzeln und Grillgerichten. Speisekarte, Öffnungszeiten & Reservierung.",
+  keywords:
+    "Backstüble, Schwaigern, Bistro, Bar, Kneipe, Speisekarte, Flammkuchen, Burger, Schnitzel, Rico Wendler, 74193",
+  openGraph: {
+    title: "Backstüble Schwaigern – Bistro & Bar seit 1983",
+    description:
+      "Flammkuchen, Burger, Schnitzel & Bier vom Fass im Herzen von Schwaigern.",
+    locale: "de_DE",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -85,18 +85,28 @@ export default function Hero() {
             </svg>
             Reservieren
           </a>
-          <button onClick={() => document.querySelector("#oeffnungszeiten")?.scrollIntoView({ behavior: "smooth" })}
+          <button onClick={() => document.querySelector("#wochenkarte")?.scrollIntoView({ behavior: "smooth" })}
             style={{
-              background: "none", border: "1px solid rgba(255,255,255,0.4)",
-              color: "rgba(255,255,255,0.85)",
+              background: "rgba(255,255,255,0.08)",
+              backdropFilter: "blur(8px)",
+              border: "1px solid rgba(255,255,255,0.4)",
+              color: "rgba(255,255,255,0.92)",
               fontFamily: "var(--f-body)", fontWeight: 500, fontSize: 14,
               padding: "13px 26px", borderRadius: 4, cursor: "pointer",
-              transition: "border-color 0.2s, color 0.2s",
+              transition: "border-color 0.2s, color 0.2s, background 0.2s",
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.8)"; e.currentTarget.style.color = "white"; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)"; e.currentTarget.style.color = "rgba(255,255,255,0.85)"; }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.8)";
+              e.currentTarget.style.color = "white";
+              e.currentTarget.style.background = "rgba(255,255,255,0.14)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.4)";
+              e.currentTarget.style.color = "rgba(255,255,255,0.92)";
+              e.currentTarget.style.background = "rgba(255,255,255,0.08)";
+            }}
           >
-            Öffnungszeiten
+            Speisekarte ansehen
           </button>
         </div>
       </div>

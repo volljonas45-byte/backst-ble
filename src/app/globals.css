@@ -46,12 +46,36 @@ a { color: inherit; }
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.reveal { animation: reveal 0.75s cubic-bezier(.22,.68,0,1.1) both; }
+.reveal { animation: reveal 0.55s cubic-bezier(.22,.68,0,1.1) both; }
 .d1 { animation-delay: 0.05s; }
 .d2 { animation-delay: 0.18s; }
 .d3 { animation-delay: 0.30s; }
 .d4 { animation-delay: 0.42s; }
 .d5 { animation-delay: 0.55s; }
+
+/* Subtle fade-up for sections coming into view */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Focus-visible polish */
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* Smooth image rendering */
+img { display: block; max-width: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
