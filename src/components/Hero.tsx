@@ -22,10 +22,16 @@ export default function Hero() {
         }}
       />
 
-      {/* Overlay – bottom heavy */}
+      {/* Overlay – top (navbar legibility) */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(to top, rgba(24,20,15,0.88) 0%, rgba(24,20,15,0.3) 55%, rgba(24,20,15,0.1) 100%)",
+        background: "linear-gradient(to bottom, rgba(24,20,15,0.72) 0%, rgba(24,20,15,0.15) 28%, transparent 45%)",
+      }} />
+
+      {/* Overlay – bottom heavy (text legibility) */}
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(to top, rgba(24,20,15,0.90) 0%, rgba(24,20,15,0.45) 40%, transparent 65%)",
       }} />
 
       {/* Content anchored bottom-left */}

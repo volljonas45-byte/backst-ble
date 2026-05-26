@@ -27,31 +27,37 @@ export default function Navbar() {
   return (
     <header style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-      transition: "background 0.4s, border-color 0.4s",
-      background: solid ? "rgba(248,245,241,0.96)" : "transparent",
+      transition: "background 0.4s, border-color 0.4s, box-shadow 0.4s",
+      background: solid ? "rgba(248,245,241,0.97)" : "transparent",
       borderBottom: solid ? "1px solid var(--line)" : "1px solid transparent",
-      backdropFilter: solid ? "blur(12px)" : "none",
+      backdropFilter: solid ? "blur(14px)" : "none",
+      boxShadow: solid ? "0 1px 24px rgba(24,20,15,0.07)" : "none",
     }}>
       <div style={{
         maxWidth: 1240, margin: "0 auto", padding: "0 32px",
-        height: 68, display: "flex", alignItems: "center", justifyContent: "space-between",
+        height: 76, display: "flex", alignItems: "center", justifyContent: "space-between",
       }}>
-        {/* Logo */}
+        {/* Logo + Brand */}
         <button onClick={() => go("#hero")} style={{
           background: "none", border: "none", cursor: "pointer",
-          display: "flex", alignItems: "center", gap: 10,
+          display: "flex", alignItems: "center", gap: 12,
         }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={img("/images/Backstueble_logo.png")}
             alt="Backstüble Logo"
-            style={{ width: 36, height: 36, objectFit: "contain" }}
+            style={{
+              width: 56, height: 56, objectFit: "contain",
+              filter: solid ? "none" : "drop-shadow(0 2px 6px rgba(0,0,0,0.5)) brightness(1.15)",
+              transition: "filter 0.3s",
+            }}
           />
           <span style={{
-            fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 16,
+            fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 20,
             color: solid ? "var(--ink)" : "white",
-            letterSpacing: "0.04em",
-            transition: "color 0.3s",
+            letterSpacing: "0.02em",
+            textShadow: solid ? "none" : "0 1px 10px rgba(0,0,0,0.6)",
+            transition: "color 0.3s, text-shadow 0.3s",
           }}>
             Backstüble
           </span>
@@ -64,12 +70,13 @@ export default function Navbar() {
               background: "none", border: "none", cursor: "pointer",
               fontFamily: "var(--f-body)", fontWeight: 500, fontSize: 13,
               letterSpacing: "0.08em", textTransform: "uppercase",
-              color: solid ? "var(--muted)" : "rgba(255,255,255,0.8)",
+              color: solid ? "var(--muted)" : "rgba(255,255,255,0.92)",
+              textShadow: solid ? "none" : "0 1px 8px rgba(0,0,0,0.7)",
               transition: "color 0.2s",
               padding: "2px 0",
             }}
               onMouseEnter={e => (e.currentTarget.style.color = solid ? "var(--ink)" : "white")}
-              onMouseLeave={e => (e.currentTarget.style.color = solid ? "var(--muted)" : "rgba(255,255,255,0.8)")}
+              onMouseLeave={e => (e.currentTarget.style.color = solid ? "var(--muted)" : "rgba(255,255,255,0.92)")}
             >
               {l.label}
             </button>
@@ -94,10 +101,12 @@ export default function Navbar() {
         }}>
           {[0, 1, 2].map(i => (
             <span key={i} style={{
-              display: "block", width: 22, height: 1.5, marginBottom: i < 2 ? 5 : 0,
-              background: solid ? "var(--ink)" : "white", borderRadius: 1,
+              display: "block", width: 24, height: 1.5, marginBottom: i < 2 ? 6 : 0,
+              background: solid ? "var(--ink)" : "white",
+              boxShadow: solid ? "none" : "0 1px 4px rgba(0,0,0,0.5)",
+              borderRadius: 1,
               transition: "all 0.3s",
-              transform: open ? (i === 0 ? "rotate(45deg) translate(4.5px,4.5px)" : i === 2 ? "rotate(-45deg) translate(4.5px,-4.5px)" : "scaleX(0)") : "none",
+              transform: open ? (i === 0 ? "rotate(45deg) translate(5px,5px)" : i === 2 ? "rotate(-45deg) translate(5px,-5px)" : "scaleX(0)") : "none",
             }} />
           ))}
         </button>
@@ -105,7 +114,7 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       <div style={{
-        overflow: "hidden", maxHeight: open ? 300 : 0,
+        overflow: "hidden", maxHeight: open ? 320 : 0,
         background: "rgba(248,245,241,0.98)", transition: "max-height 0.35s ease",
         borderTop: open ? "1px solid var(--line)" : "none",
       }}>
